@@ -13,7 +13,7 @@ Select a Key #, then select the file you want to decrypt. check `./encrypted/` f
 Select the key # you used to encrypt the file, then select the file you want to run. This will decrypt the file, create a copy in `./decrypted/`, and then run the script in the terminal (if applicable).
 
 ### Future Features
-I would like to add the ability to encode special characters. Also, I would like to add checks for different file types.
+I would like to add the ability to encode special characters, so I would probably end up using a different cipher/encryption method. Also, I would like to add checks for different file types.
 
 Challenge from [Karan Projects](https://github.com/karan/Projects)
 
