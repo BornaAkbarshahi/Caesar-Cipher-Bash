@@ -2,9 +2,6 @@
 # This program implements a very basic cipher to encrypt/decrypt your files.
 # You can also use this program to decrypt and run a file in one step.
 # This is not a production-level cipher.
-# I wrote this script to show my ability to pick up new skills / use the ones
-# I already have to the best of my ability.
-# - Henry Kobin
 
 echo ------------------------------------------------
 echo 'Hello, welcome to the file encryptor/decryptor.'
