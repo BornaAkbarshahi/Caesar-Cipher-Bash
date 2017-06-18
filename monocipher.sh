@@ -42,18 +42,17 @@ select opt in "${options[@]}"; do
       elif (( REPLY > 0 && REPLY <= ${#options[@]} )) ; then
         #user has chosen valid file for decryption.
         export alpha=$(echo {a..z} | sed -r 's/ //g')
-        #create list of letters in alphabet / remove spaces.
         export cipher=$(echo $alpha | sed -r "s/^.{$key}//g")$(echo $alpha | sed -r "s/.{$( expr 26 - $key )}$//g")
         #first delete characters characters defined by key. i.e. 5 = fghijkl...
         #second delete all characters after the number ie. 5 = abcde;
-        #check to see if ./decrypted file folder exists.
-        if [ ! -d ./decrypted/ ]; then
+        #check to see if ./encrypted file folder exists.
+        if [ ! -d ./encrypted/ ]; then
           #doesn't exist, make directory.
-          mkdir  ./decrypted/;
+          mkdir  ./encrypted/;
         fi
-        #Run txt contents through cipher, export to ./decrypted/$opt
-        tr  '[A-Z]' $alpha < $opt  | tr $alpha $cipher > ./decrypted/$opt;
-        echo $opt decrypted and sent to /decrypted folder.
+        #Run txt contents through cipher, export to ./encrypted/$opt
+        tr  '[A-Z]' $alpha < $opt  | tr $alpha $cipher  >> ./decrypted/$opt;
+        echo File $opt decrypted and sent to /decrypted folder.
     else
     #user has selected a bad option / not chosen a number.
     echo "invalid selection."
@@ -81,20 +80,18 @@ elif [ $opt = "Run" ]; then
       exit
     elif (( REPLY > 0 && REPLY <= ${#options[@]} )) ; then
       #user has chosen valid file for decryption.
-      export alph=$(echo {a..z} | sed -r 's/ //g')
-      #create list of letters (alphabet) and then remove spaces between them.
-      export cipher=$(echo $alph | sed -r "s/^.{$key}//g")$(echo $alph | sed -r "s/.{$( expr 26 - $key )}$//g")
+      export alpha=$(echo {a..z} | sed -r 's/ //g')
+      export cipher=$(echo $alpha | sed -r "s/^.{$key}//g")$(echo $alpha | sed -r "s/.{$( expr 26 - $key )}$//g")
       #first delete characters characters defined by key. i.e. 5 = fghijkl...
       #second delete all characters after the number ie. 5 = abcde;
-      #check to see if ./decrypted file folder exists.
-      if [ ! -d ./decrypted/ ]; then
+      #check to see if ./encrypted file folder exists.
+      if [ ! -d ./encrypted/ ]; then
         #doesn't exist, make directory.
-        mkdir  ./decrypted/;
+        mkdir  ./encrypted/;
       fi
-      tr  '[A-Z]' $alph < $opt  | tr $alph $cipher > ./decrypted/$opt;
-      #takes $opt(file) and repaces any capital letter with the correct value from $alph.
-      #next downcase and then $alph's characters are replaced by the corresponding values in
-      echo $opt decrypted.
+      #Run txt contents through cipher, export to ./encrypted/$opt
+      tr  '[A-Z]' $alpha < $opt  | tr $alpha $cipher  >> ./decrypted/$opt;
+      echo File $opt decrypted and sent to /decrypted folder.
       echo running script...
       sh ./decrypted/$opt
   else
