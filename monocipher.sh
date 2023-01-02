@@ -30,7 +30,7 @@ select opt in "${options[@]}"; do
     read -p 'Key # (Between 1-25): ' key
     prompt=("Please select a file to decrypt: ")
     #display files in directory as options.
-    options=( $(find -maxdepth 1 -print0 | xargs -0) )
+    options=( $(find . -maxdepth 1 -print0 | xargs -0) )
     echo ---------------------------------------
     echo $prompt
     echo ---------------------------------------
@@ -46,9 +46,9 @@ select opt in "${options[@]}"; do
         #first delete characters characters defined by key. i.e. 5 = fghijkl...
         #second delete all characters after the number ie. 5 = abcde;
         #check to see if ./encrypted file folder exists.
-        if [ ! -d ./encrypted/ ]; then
+        if [ ! -d ./decrypted/ ]; then
           #doesn't exist, make directory.
-          mkdir  ./encrypted/;
+          mkdir  ./decrypted/;
         fi
         #Run txt contents through cipher, export to ./encrypted/$opt
         tr  '[A-Z]' $alpha < $opt  | tr $alpha $cipher  >> ./decrypted/$opt;
@@ -69,7 +69,7 @@ elif [ $opt = "Run" ]; then
   #recieve key value from user.
   prompt=("Please select a file to decrypt: ")
 #display files in directory as options.
-  options=( $(find -maxdepth 1 -print0 | xargs -0) )
+  options=( $(find . -maxdepth 1 -print0 | xargs -0) )
   echo ---------------------------------------
   echo $prompt
   echo ---------------------------------------
@@ -85,9 +85,9 @@ elif [ $opt = "Run" ]; then
       #first delete characters characters defined by key. i.e. 5 = fghijkl...
       #second delete all characters after the number ie. 5 = abcde;
       #check to see if ./encrypted file folder exists.
-      if [ ! -d ./encrypted/ ]; then
+      if [ ! -d ./decrypted/ ]; then
         #doesn't exist, make directory.
-        mkdir  ./encrypted/;
+        mkdir  ./decrypted/;
       fi
       #Run txt contents through cipher, export to ./encrypted/$opt
       tr  '[A-Z]' $alpha < $opt  | tr $alpha $cipher  >> ./decrypted/$opt;
@@ -121,7 +121,7 @@ elif [ $opt  = "Encrypt" ]; then
     read -p 'Key # (Between 1-25): ' key
     prompt=("Please select a file to encrypt: ")
     #display files in directory as options.
-    options=( $(find -maxdepth 1 -print0 | xargs -0) )
+    options=( $(find . -maxdepth 1 -print0 | xargs -0) )
     echo ---------------------------------------
     echo $prompt
     echo ---------------------------------------
